@@ -33,11 +33,11 @@ end
 local function username_id(cb_extra, success, result)
    local receiver = cb_extra.receiver
    local qusername = cb_extra.qusername
-   local text = 'User '..qusername..' not found in this group!'
+   local text = 'حاجیمون '..qusername..' تو گپ نی'
    for k,v in pairs(result.members) do
       vusername = v.username
       if vusername == qusername then
-      	text = 'ID for username\n'..vusername..' : '..v.id
+      	text = 'ایدی\n'..vusername..' : '..v.id
       end
    end
    send_large_msg(receiver, text)
@@ -46,9 +46,9 @@ end
 local function run(msg, matches)
    local receiver = get_receiver(msg)
    if matches[1] == "!id" then
-      local text = 'Name : '.. string.gsub(user_print_name(msg.from),'_', ' ') .. '\nID : ' .. msg.from.id
+      local text = 'اسم : '.. string.gsub(user_print_name(msg.from),'_', ' ') .. '\nID : ' .. msg.from.id
       if is_chat_msg(msg) then
-         text = text .. "\n\nYou are in group " .. string.gsub(user_print_name(msg.to), '_', ' ') .. " (ID: " .. msg.to.id  .. ")"
+         text = text .. "\n\nتو گروه " .. string.gsub(user_print_name(msg.to), '_', ' ') .. " (ایدی: " .. msg.to.id  .. ")"
       end
       return text
    elseif matches[1] == "chat" then
