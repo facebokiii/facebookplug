@@ -90,7 +90,7 @@ local function username_id(cb_extra, success, result)
    local receiver = cb_extra.receiver
    local chat_id = cb_extra.chat_id
    local member = cb_extra.member
-   local text = 'No user @'..member..' in this group To Push Its Siktir Button'
+   local text = 'هیشکی با یوزر @'..member..' نیس تا دکمه سکتیرشو بزنم
    for k,v in pairs(result.members) do
       vusername = v.username
       if vusername == member then
@@ -144,7 +144,7 @@ local receiver = get_receiver(msg)
 		  local get_cmd = 'siktir'
           chat_info(receiver, username_id, {get_cmd=get_cmd, receiver=receiver, chat_id=msg.to.id, member=member})
         end
-		return 'User '..user_id..' siktired'
+		return 'حاجیمون '..user_id..' دکمه سیکیرشو زدم'
     end
   end
   if matches[1] == 'unsiktir' then
@@ -154,7 +154,7 @@ local receiver = get_receiver(msg)
 		    local user_id = matches[2]
 			local hash =  'banned:'..chat_id..':'..user_id
 			redis:del(hash)
-			return 'User '..user_id..' unsiktired'
+			return 'حاجیمون '..user_id..' از سیکتیری در اومد'
 		else
 	      local member = string.gsub(matches[2], '@', '')
 		  local get_cmd = 'unsiktir'
@@ -202,7 +202,7 @@ local receiver = get_receiver(msg)
 			if string.match(matches[2], '^%d+$') then
 				if matches[2] == our_id then return false end
 				unsiktirbaw_user(user_id)
-			return 'User '..user_id..' unsiktired'
+			return 'حاجیمون '..user_id..' از سیکتیری بیرون اومد'
 			else
 				local member = string.gsub(matches[2], '@', '')
 				local get_cmd = 'unsiktirbaw'
