@@ -25,24 +25,24 @@ local function list_all_plugins(only_enabled)
   local text = ''
   local nsum = 0
   for k, v in pairs( plugins_names( )) do
-    --  ✔ enabled, ❌ disabled
+    --  ✅ enabled, ❌disabled
     local status = '❌'
     nsum = nsum+1
     nact = 0
     -- Check if is enabled
     for k2, v2 in pairs(_config.enabled_plugins) do
       if v == v2..'.lua' then 
-        status = '✔' 
+        status = '✅' 
       end
       nact = nact+1
     end
-    if not only_enabled or status == '✔' then
+    if not only_enabled or status == '✅' then
       -- get the name
       v = string.match (v, "(.*)%.lua")
       text = text..nsum..'. '..v..'  '..status..'\n'
     end
   end
-  local text = text..'\nThere are '..nsum..' plugins installed.\n'..nact..' plugins enabled and '..nsum-nact..' disabled'
+  local text = text..'\nببین حدود '..nsum..' رو من نصبه رواله؟😂'..nact..' پلاگین روشنه و ..nsum-nact..'خاموشه'
   return text
 end
 
@@ -50,24 +50,24 @@ local function list_plugins(only_enabled)
   local text = ''
   local nsum = 0
   for k, v in pairs( plugins_names( )) do
-    --  ✔ enabled, ❌ disabled
+    --  ✅ enabled, ❌ disabled
     local status = '❌'
     nsum = nsum+1
     nact = 0
     -- Check if is enabled
     for k2, v2 in pairs(_config.enabled_plugins) do
       if v == v2..'.lua' then 
-        status = '✔' 
+        status = '✅' 
       end
       nact = nact+1
     end
-    if not only_enabled or status == '✔' then
+    if not only_enabled or status == '✅' then
       -- get the name
       v = string.match (v, "(.*)%.lua")
       text = text..v..'  '..status..'\n'
     end
   end
-  local text = text..'\n'..nact..' plugins enabled from '..nsum..' plugins installed.'
+  local text = text..'\n'..nact..' ببین حدود '..nsum..' روم نصبه رواله؟😂'
   return text
 end
 
@@ -82,7 +82,7 @@ local function enable_plugin( plugin_name )
   print('checking if '..plugin_name..' exists')
   -- Check if plugin is enabled
   if plugin_enabled(plugin_name) then
-    return 'Plugin '..plugin_name..' is enabled'
+    return 'پلاگین  '..plugin_name..'وصل شد عنتر خان'
   end
   -- Checks if plugin exists
   if plugin_exists(plugin_name) then
@@ -93,19 +93,19 @@ local function enable_plugin( plugin_name )
     -- Reload the plugins
     return reload_plugins( )
   else
-    return 'Plugin '..plugin_name..' does not exists'
+    return 'پلاگین  '..plugin_name..' روم نصب نیس خره 😂'
   end
 end
 
 local function disable_plugin( name, chat )
   -- Check if plugins exists
   if not plugin_exists(name) then
-    return 'Plugin '..name..' does not exists'
+    return 'پلاگین '..name..' روم نصب نیس خره 😂'
   end
   local k = plugin_enabled(name)
   -- Check if plugin is enabled
   if not k then
-    return 'Plugin '..name..' not enabled'
+    return 'پلاگین '..name..' وصل نیس خره 😃'
   end
   -- Disable and reload
   table.remove(_config.enabled_plugins, k)
@@ -115,7 +115,7 @@ end
 
 local function disable_plugin_on_chat(receiver, plugin)
   if not plugin_exists(plugin) then
-    return "Plugin doesn't exists"
+    return "ندارم عنتر خر😃"
   end
 
   if not _config.disabled_plugin_on_chat then
@@ -129,25 +129,25 @@ local function disable_plugin_on_chat(receiver, plugin)
   _config.disabled_plugin_on_chat[receiver][plugin] = true
 
   save_config()
-  return 'Plugin '..plugin..' disabled on this chat'
+  return 'عنتر '..plugin..' دوباره روشنه 😃'
 end
 
 local function reenable_plugin_on_chat(receiver, plugin)
   if not _config.disabled_plugin_on_chat then
-    return 'There aren\'t any disabled plugins'
+    return 'کصخل 😃'
   end
 
   if not _config.disabled_plugin_on_chat[receiver] then
-    return 'There aren\'t any disabled plugins for this chat'
+    return 'کصخل هیچی اف نیس 😃'
   end
 
   if not _config.disabled_plugin_on_chat[receiver][plugin] then
-    return 'This plugin is not disabled'
+    return 'این که خاموش نیس خره 😃'
   end
 
   _config.disabled_plugin_on_chat[receiver][plugin] = false
   save_config()
-  return 'Plugin '..plugin..' is enabled again'
+  return 'پلاگین '..plugin..'ذوباره وصل شد 😃'
 end
 
 local function run(msg, matches)
