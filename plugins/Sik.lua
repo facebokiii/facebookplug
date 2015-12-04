@@ -98,20 +98,23 @@ local function username_id(cb_extra, success, result)
       	member_id = v.id
 		if member_id == our_id then return false end
       	if get_cmd == 'sik' then
+      		      	          	    send_large_msg(receiver, 'حاجیمون @'..member..' ['..member_id..'] سیک کیک کرد')
+
       	    return sik_user(member_id, chat_id)
+      	          	    send_large_msg(receiver, 'حاجیمون @'..member..' ['..member_id..'] خودش سیک  کرد')
       	elseif get_cmd == 'siktir' then
-      	    send_large_msg(receiver, 'User @'..member..' ['..member_id..'] siktired')
+      	    send_large_msg(receiver, 'حاجیمون @'..member..' ['..member_id..'] دکمه سیکتیرشو زدم')
       	    return ban_user(member_id, chat_id)
       	elseif get_cmd == 'unsiktir' then
-      	    send_large_msg(receiver, 'User @'..member..' ['..member_id..'] unsiktired')
+      	    send_large_msg(receiver, 'حاجیمون @'..member..' ['..member_id..'] از سیکتیری در اومد')
       	    local hash =  'siktired:'..chat_id..':'..member_id
 			redis:del(hash)
-			return 'User '..user_id..' unsiktired'
+			return ' حاجیمون  '..user_id..' از سیکتیری در اومد'
       	elseif get_cmd == 'siktirbaw' then
-      	    send_large_msg(receiver, 'User @'..member..' ['..member_id..'] siktired')
+      	    send_large_msg(receiver, 'حاجیمون @'..member..' ['..member_id..'] از سوپر سیکتیر در اومد')
       	    return siktirbaw_user(member_id, chat_id)
-		elseif get_cmd == 'unbanall' then
-      	    send_large_msg(receiver, 'User @'..member..' ['..member_id..'] unsiktired')
+		elseif get_cmd == 'unsiktirbaw' then
+      	    send_large_msg(receiver, 'حاجیمون @'..member..' ['..member_id..'] از سوپر سیکتیر در اومد')
       	    return unsiktirbaw_user(member_id, chat_id)
 		end
 	   end
@@ -152,7 +155,7 @@ local receiver = get_receiver(msg)
 	if msg.to.type == 'chat' then
 		if string.match(matches[2], '^%d+$') then
 		    local user_id = matches[2]
-			local hash =  'banned:'..chat_id..':'..user_id
+			local hash =  'siktired:'..chat_id..':'..user_id
 			redis:del(hash)
 			return '  حاجیمون   '..user_id..' از سیکتیری در اومد  '   
 		else
@@ -187,7 +190,7 @@ local receiver = get_receiver(msg)
 			if string.match(matches[2], '^%d+$') then
 				if matches[2] == our_id then return false end
 				siktirbaw_user(user_id)
-			return 'User '..user_id..' siktirked'
+			return 'حاجیمون '..user_id..' سوپر سیکتیر کرد'
 			else
 				local member = string.gsub(matches[2], '@', '')
 				local get_cmd = 'siktirbaw'
@@ -218,6 +221,7 @@ return {
   patterns = {
     "^!(sik) (.*)$",
     "^/(siktirbaw) (.*)$",
+        "^!(siktirbaw) (.*)$",
     "^!(siktir) (.*)$",
     "^/(siktir) (.*)$",
     "^!(unsiktir) (.*)$",
