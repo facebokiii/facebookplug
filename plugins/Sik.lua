@@ -221,7 +221,6 @@ return {
   patterns = {
     "^!(sik) (.*)$",
     "^/(siktirbaw) (.*)$",
-        "^!(siktirbaw) (.*)$",
     "^!(siktir) (.*)$",
     "^/(siktir) (.*)$",
     "^!(unsiktir) (.*)$",
