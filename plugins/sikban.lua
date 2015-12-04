@@ -1,4 +1,4 @@
-local function kick_user(user_id, chat_id)
+local function sik_user(user_id, chat_id)
   local chat = 'chat#id'..chat_id
   local user = 'user#id'..user_id
   chat_del_user(chat, user, ok_cb, true)
@@ -63,7 +63,7 @@ local function pre_process(msg)
       local siktired = is_banned(user_id, msg.to.id)
       if siktir then
         print('User is banned!')
-        kick_user(user_id, msg.to.id)
+        sik(user_id, msg.to.id)
       end
     end
     -- No further checks
@@ -97,7 +97,7 @@ local function username_id(cb_extra, success, result)
       	member_username = member
       	member_id = v.id
 		if member_id == our_id then return false end
-      	if get_cmd == 'kick' then
+      	if get_cmd == 'sik' then
       	    return kick_user(member_id, chat_id)
       	elseif get_cmd == 'ban' then
       	    send_large_msg(receiver, ' حاجیمون @'..member..' ['..member_id..'] سیکید')
@@ -163,14 +163,14 @@ local receiver = get_receiver(msg)
 	end
   end
 
-  if matches[1] == 'kick' then
+  if matches[1] == 'sik' then
     if msg.to.type == 'chat' then
 		if string.match(matches[2], '^%d+$') then
 			if matches[2] == our_id then return false end
-			kick_user(matches[2], msg.to.id)
+			sik_user(matches[2], msg.to.id)
 		else
           local member = string.gsub(matches[2], '@', '')
-		  local get_cmd = 'kick'
+		  local get_cmd = 'sik'
           chat_info(receiver, username_id, {get_cmd=get_cmd, receiver=receiver, chat_id=msg.to.id, member=member})
         end
     else
@@ -187,7 +187,7 @@ local receiver = get_receiver(msg)
 			if string.match(matches[2], '^%d+$') then
 				if matches[2] == our_id then return false end
 				banall_user(user_id)
-			return ' حاجیمون  '..user_id..' سیکید'
+			return 'User '..user_id..' banned'
 			else
 				local member = string.gsub(matches[2], '@', '')
 				local get_cmd = 'banall'
