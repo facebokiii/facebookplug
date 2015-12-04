@@ -90,7 +90,7 @@ local function username_id(cb_extra, success, result)
    local receiver = cb_extra.receiver
    local chat_id = cb_extra.chat_id
    local member = cb_extra.member
-   local text = 'No user @'..member..' in this group.'
+   local text = ' هیشکی با یوزر @'..member..' نیس تا دکمه سکتیرشو بزنم  '
    for k,v in pairs(result.members) do
       vusername = v.username
       if vusername == member then
@@ -144,7 +144,7 @@ local receiver = get_receiver(msg)
 		  local get_cmd = 'ban'
           chat_info(receiver, username_id, {get_cmd=get_cmd, receiver=receiver, chat_id=msg.to.id, member=member})
         end
-		return 'User '..user_id..' banned'
+		return '  حاجیمون '..user_id..' دکمه سیکیرشو زدم  '   
     end
   end
   if matches[1] == 'unban' then
@@ -202,7 +202,7 @@ local receiver = get_receiver(msg)
 			if string.match(matches[2], '^%d+$') then
 				if matches[2] == our_id then return false end
 				unbanall_user(user_id)
-			return 'User '..user_id..' unbanned'
+			return '  حاجیمون  '..user_id..'  از سیکتیری بیرون اومد'  
 			else
 				local member = string.gsub(matches[2], '@', '')
 				local get_cmd = 'unbanall'
